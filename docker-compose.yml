@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+ web:
+  build: .
+  environment:
+   - DJANGO_SETTINGS_MODULE=evident.settings
+   - SECRET_KEY=django-insecure-83@s!j&=k@_es_r58p=6e3&=%iu3wyh99jm1as=f6qgikzrz=+
+  volumes:
+   - .:/evident
+  ports:
+   - "8000:8000"
+  image: web:evident
+  container_name: evident_container
+  command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    
