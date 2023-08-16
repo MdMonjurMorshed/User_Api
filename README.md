@@ -1,3 +1,6 @@
+## Get project
+clone this project from this repository using:<bg>
+git clone project_HTTPS_url
 ## create virtual environment
 make folder to make it root directory.create virtual environment inside the root directory<br>
 python -m venv 'name of your env file'
