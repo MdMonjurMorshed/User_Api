@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title%}Home|evident bd ltd{% endblock%}</title>
+
+    {% include 'evident_app/lib/scripts.html'%}
+    {% include 'evident_app/lib/style.html'%}
+</head>
+
+<body>
+    {% if user.is_authenticated %}
+    <nav class="navbar navbar-expand-lg navbar-dark  " style="background-color:#1e4837;">
+        <div class="container">
+            
+            <a class="navbar-brand" href="#">{{user.user_name}}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+                <div class="container d-flex justify-content-end">
+                    <ul class="navbar-nav px-2 ">
+
+                        <li class="nav-item  "><a class="nav-link btn btn-danger text-white" href="{% url 'logout'%}">logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <div class="container-base">
+        <div class="sidebar collapse " id="sidebarContent">
+            <div class="container">
+                <p>this is a paragraph</p>
+            </div>
+            <div class="">
+           
+            </div>
+        </div>
+        <div class="main-content ">
+            {% include 'evident_app/search.html'%}
+
+        </div>
+
+    </div>
+    {% else %}
+    <nav class="navbar navbar-expand-lg navbar-dark  " style="background-color:#1e4837;">
+        <div class="container">
+            <a class="navbar-brand" href="#">Evident BD LTD</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+                <div class="container  d-flex justify-content-start">
+                    <div class="container navbar-nav d-flex justify-content-center">
+                    </div>
+                    <div class="container d-flex justify-content-end">
+                        <ul class="navbar-nav px-2 ">
+                            <li class="nav-item  "><a class="nav-link btn btn-danger text-white" href="{%url 'login'%}">login</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+
+                            <li class="nav-item "><a class="nav-link btn btn-warning text-white" href="{% url 'signup-form'%}">Sign Up</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </nav>
+    <div class="container-base">
+        <div class="sidebar collapse " id="sidebarContent">
+            <div class="container">
+                <p>this is a paragraph</p>
+            </div>
+            <div class="">
+           
+            </div>
+
+
+
+        </div>
+        <div class="main-content ">
+            {% block content%}
+            <div class="container d-flex justify-content-center my-5 py-5">
+                <h1 class="d-flex justify-content-center py-5 mt-5">Welcome To Evident Bd LTD</h1>
+            </div>
+            {% endblock%}
+
+        </div>
+
+    </div>
+    {% endif %}
+    <script>
+        $(document).ready(function () {
+
+
+            var winWidth = window.innerWidth
+            window.addEventListener('resize', function () {
+
+                if (window.innerWidth < 760) {
+
+                    $('.user_title').removeClass('ml-auto')
+                }
+                else {
+                    $('.user_title').addClass('ml-auto')
+
+                }
+            })
+
+        })
+    </script>
+
+</body>
+
+</html>

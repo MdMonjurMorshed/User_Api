@@ -1,0 +1,97 @@
+
+
+
+
+<div class="container d-flex justify-content-center">
+
+    <div class="center card col-6 my-5" style="border: 3px solid #1e4837; ">
+        <h1 style="text-align: center;">Hello {{user.user_name}}!! <br> Welcome To Evident Bd LTD</h1>
+
+       
+    </div>
+
+</div>
+
+<div class="container d-flex justify-content-center">
+    <div class="center card col-6 my-5" style="border: 3px solid #1e4837; ">
+       
+        <form class="p-3" method="POST">
+
+            {% csrf_token%}
+
+            <div class="container">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="input_values"> Input Values:</label>
+                        </div>
+                        <div class="col-9"> <input type="text" class="form-control input_val"  name="input_values" placeholder="Enter Comma separated value" > </div>
+                    </div>  
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="search_value"> Search Value:</label>
+                        </div>
+                        <div class="col-9"> <input type="text" class="form-control" name="search_value"  > </div>
+                    </div>  
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-7"><h4>Result The Folafol:</h4></div>
+                        <div class="col-5" id="result"> </div>
+                    </div>
+                </div>
+                <div class="btn form-control btn-success" id="button_khoj" role="button" style="background-color:#1e4837 ;">Khoj The Search</div>
+        
+                
+        
+        
+            </div>
+        
+         
+        </form>
+       
+    </div>
+
+    
+</div>
+<script>
+    $(document).ready(function(){
+
+        $("#button_khoj").on('click',function(){
+            var csrf=$("input[name=csrfmiddlewaretoken]").val()
+            var input_value=$("input[name=input_values]").val()
+            var input_array = input_value.split(',');
+           
+            console.log(input_value)
+            var search_value=$("input[name=search_value]").val()
+            if (input_value!='' && search_value!=''){
+                if (input_array.includes(search_value)){
+                    $("#result").html(`<h5> True </h5>`)
+
+                }
+                else{
+                    $("#result").html(`<h5> False </h5>`)
+                }
+                console.log('tokin is',localStorage.getItem('token'))
+                var token=localStorage.getItem('token')
+                var post_data={
+                    'input_value':input_value
+                }
+             
+                axios.post("{%url 'input-value'%}",post_data,{"headers":{"X-CSRFToken":csrf}}).then(function(response){
+                    console.log(response.data)
+                    $('input[name=input_values]').val('')
+                    $('input[name=search_value]').val('')
+                    
+                })
+
+                
+
+            }
+           
+        })
+        
+    })
+</script>

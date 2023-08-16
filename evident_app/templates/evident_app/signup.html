@@ -1,0 +1,50 @@
+{% extends 'evident_app/base.html'%}
+{% block title%}Signup|evident bd ltd{% endblock%}
+
+{% block content%}
+<div class="container d-flex justify-content-center">
+
+    <div class="center card col-6 my-5" style="border: 3px solid #1e4837; ">
+        <form class="p-3" method="POST" enctype="multipart/form-data">
+
+            {% csrf_token%}
+            {{form.as_p}}
+        
+         <div class=" form-control btn  " id="signup_submit" style="background-color: #1e4837;color: white;" >register user</div>
+        </form>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function(){
+
+    $("#signup_submit").on('click',function(){
+      var csrf= $('input[name=csrfmiddlewaretoken]').val()
+      var first_name=$('#id_first_name').val()
+      var last_name=$('#id_last_name').val()
+      var user_name=$('#id_user_name').val()
+      var email=$('#id_email').val()
+      var password1=$('#id_password1').val()
+      var password2=$('#id_password2').val()
+      if (password1==password2){
+        var user_data={
+            'first_name':first_name,
+            'last_name':last_name,
+            'user_name':user_name,
+            'email':email,
+            'password':password1
+        }
+
+        axios.post("{%url 'user-creating'%}",user_data,{
+            'header':{"X-CSRFTOKEN":csrf}
+        }).then(function(response){
+            console.log(response.data);
+            window.location.href="{% url 'base'%}"
+            
+           
+        })
+      }
+        })
+    })
+</script>
+{% endblock%}
