@@ -34,3 +34,14 @@ python manage.py runserver
 This project is deployed on PythonAnyWhere platform for free<br>
 see the guidelines here :https://help.pythonanywhere.com/pages/DeployExistingDjangoProject/<br>
 deployed link of the project: https://mmt37.pythonanywhere.com/
+
+## Api  Testing
+go to https://mmt37.pythonanywhere.com/ this link. and signup with credentials.<br>
+https://mmt37.pythonanywhere.com/login-api<br> use this url in the api testing platform like postman<br>
+give the username and password you just enter to sign up in the body of the api as json format and make a post request <br>
+if user is authenticated then it will resposne back a token.you can use this token to authenticate other api<br>
+https://mmt37.pythonanywhere.com/input-value/api<br>
+use this url in the api testing platform and make a get request and provide the token in the header section<br>
+Key=Authorization<br>
+value=Token your token<br>
+At last send the get request
